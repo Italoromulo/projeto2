@@ -52,8 +52,8 @@ CREATE TABLE `cadastro_tech` (
 --
 
 INSERT INTO `cadastro_tech` (`idusuarios`, `nome`, `cpf`, `email`, `telefone`, `data_nasc`, `endereco`, `sexo`, `cep`, `senha`, `login`, `nome_mae`) VALUES
-(31, 'admin', '170.385.747-01', 'admin@admin.com', '(21) 99802-7990', '2025-09-19', 'Rua Alto Parnaiba, Campo Grande, Rio de Janei', 'Masculino', '23015210', 'admin', 'admin', 'admin'),
-(32, 'lojapc', '170.385.747-01', 'lojapc@gmail.com', '(21) 99802-7990', '2025-09-10', 'Rua Alto Parnaiba, Campo Grande, Rio de Janei', 'Masculino', '23015210', '1234', 'lojapc', 'monique');
+(31, 'admin', '170.385.747-01', 'admin@admin.com', '(21) 99802-7990', '2025-09-19', 'Rua Alto Parnaiba, Campo Grande, Rio de Janeiro', 'Masculino', '23015210', 'admin', 'admin', 'admin'),
+(32, 'lojapc', '170.385.747-01', 'lojapc@gmail.com', '(21) 99802-7990', '2025-09-10', 'Rua Alto Parnaiba, Campo Grande, Rio de Janeiro', 'Masculino', '23015210', '1234', 'lojapc', 'monique');
 
 -- --------------------------------------------------------
 
