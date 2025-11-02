@@ -336,10 +336,12 @@ $produto = $result->fetch_assoc();
             <a href="loja.php" class="logo">Perigo <span>Tech</span></a>
             <nav class="main-nav">
                 <span>
-                    <a href="loja.php#prod_destaq">Produtos em Destaque</a>
-                    <a href="loja.php#perif">Periféricos</a>
-                    <a href="loja.php#pc_completo">PCs Completos</a>
-                    <a href="loja.php#">Início</a>
+                <a href="loja.php#">Início</a>
+                <a href="loja.php#prod_destaq"> Em Destaque</a>
+                <a href="loja.php#perif">Periféricos</a>
+                <a href="loja.php#pc_completo">PCs</a>
+                <a href="loja.php#fontes">Fontes</a>
+                <a href="loja.php#placas">Placas</a>
                 </span>
             </nav>
             <div class="header-icons">
