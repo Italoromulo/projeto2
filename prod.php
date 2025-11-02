@@ -8,7 +8,6 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-// ADICIONADO: Inicia a sessão para "lembrar" do utilizador ligado
 session_start();
 if (!isset($_GET['id'])) {
     die("Produto não especificado.");
@@ -451,3 +450,4 @@ $produto = $result->fetch_assoc();
 </body>
 
 </html>
+
