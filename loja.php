@@ -8,7 +8,6 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Inicia a sessão para "lembrar" do usuário logado
 session_start();
 
 function renderProduto($row)
@@ -506,7 +505,7 @@ function renderProduto($row)
         }
 
         .search-container.active .search-input {
-            width: 200px;
+            width: 150px;
             opacity: 1;
             padding: 0 15px;
             border: 1px solid #ddd;
@@ -569,17 +568,21 @@ function renderProduto($row)
         <div class="container">
             <a href="#" class="logo">Perigo <span>Tech</span></a>
             <nav class="main-nav">
-                <a href="#prod_destaq">Produtos em Destaque</a>
-                <a href="#perif">Periféricos</a>
-                <a href="#pc_completo">PCs Completos</a>
                 <a href="#">Início</a>
+                <a href="#prod_destaq"> Em Destaque</a>
+                <a href="#perif">Periféricos</a>
+                <a href="#pc_completo">PCs</a>
+                <a href="#fontes">Fontes</a>
+                <a href="#placas">Placas</a>
             </nav>
 
             <div class="header-icons">
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Pesquisar...">
-                    <a href="#" class="search-button" aria-label="Pesquisar"><i class="fas fa-search"></i></a>
-                </div>
+                <form action="loja.php" method="get">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Pesquisar...">
+                        <a href="#" class="search-button" aria-label="Pesquisar"><i class="fas fa-search"></i></a>
+                    </div>
+                </form>
                 <a href="carrinho.php" aria-label="Carrinho"><i class="fas fa-shopping-cart"></i> <span>0</span></a>
                 <?php if (isset($_SESSION['nome'])) : ?>
                     <span style="font-size: 1rem; font-weight: 700; color: #000; white-space: nowrap;">
@@ -637,7 +640,7 @@ function renderProduto($row)
                     <div class="carrossel-wrapper">
                         <div class="horizontal" id="carrossel-destaques">
                             <?php
-                            $categorias_destaque = ['Placas de Vídeo', 'Processadores', 'Armazenamento', 'Memória RAM', 'Monitor'];
+                            $categorias_destaque = ['Placas de Vídeo2', 'Processadores', 'Armazenamento', 'Memória RAM', 'Monitor'];
                             $sql = "SELECT * FROM produtos WHERE categorias IN ('" . implode("','", $categorias_destaque) . "')";
                             $result = $conn->query($sql);
                             if ($result->num_rows > 0) {
@@ -721,6 +724,29 @@ function renderProduto($row)
                 </div>
             </div>
         </section>
+        
+        <section id="placas" class="product-section secao-carrossel">
+            <div class="container" style="text-align: center; width: 100%;">
+                <h2>Placas de Vídeo</h2>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <button class="btn-carrossel esquerda" onclick="scrollCarrossel(-1, 'carrossel-placas')">❮</button>
+                    <div class="carrossel-wrapper">
+                        <div class="horizontal" id="carrossel-placas">
+                            <?php
+                            $sql = "SELECT * FROM produtos WHERE categorias = 'Placas de vídeo'";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) renderProduto($row);
+                            } else {
+                                echo "<p>Nenhuma Placa encontrada.</p>";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <button class="btn-carrossel direita" onclick="scrollCarrossel(1, 'carrossel-placas')">❯</button>
+                </div>
+            </div>
+        </section>
 
         <footer class="main-footer">
             <div class="container">
@@ -779,7 +805,6 @@ function renderProduto($row)
             const addToCartButtons = document.querySelectorAll('.btn-add-cart'); 
           addToCartButtons.forEach(button => {
               button.addEventListener('click', function() {
-                  // BÔNUS: Pega o ID do produto que colocamos no 'data-id'
                   const produtoId = this.dataset.id;
                   alert('Produto ' + produtoId + ' adicionado ao carrinho! (Isso é uma demonstração)');
               });
@@ -799,31 +824,18 @@ function renderProduto($row)
             });
         });
 
+        // Engrenagem admin
         document.addEventListener('DOMContentLoaded', function() {
-            // ... (seu código existente do menu mobile, carrinho, etc.) ...
-
-            // --- LÓGICA DO "QUADRADINHO" DE ADMIN ---
-            
-            // Tenta encontrar o botão da engrenagem
             const adminButton = document.getElementById('admin-menu-button');
-            
-            // Só executa este código se o botão existir (ou seja, se o admin estiver logado)
             if (adminButton) {
                 adminButton.addEventListener('click', function(event) {
-                    // Impede o link <a> de tentar navegar para "#"
                     event.preventDefault(); 
-                    
-                    // Pega o "quadradinho"
                     const dropdown = document.getElementById('admin-menu-dropdown');
                     
-                    // Adiciona ou remove a classe 'show' para mostrar/esconder
                     dropdown.classList.toggle('show');
                 });
             }
-
-            // Opcional: Fecha o "quadradinho" se o usuário clicar em qualquer outro lugar da tela
             window.addEventListener('click', function(event) {
-                // Checa se o clique NÃO foi na engrenagem
                 if (!event.target.closest('#admin-menu-button')) {
                     
                     const dropdowns = document.querySelectorAll('.admin-dropdown-content');
